@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PhotoShare</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<!-- ログイン機能 -->
+	<% if current_user %>
+		<%= current_user.name %>さん |
+		<%= link_to "logout", logout_path %>
+	<% else %>
+		ログインしてください : 
+		<%= link_to "Twitter", "/auth/twitter" %>
+		<%= link_to "Facebook", "/auth/facebook" %>
+	<% end %>
+	<%= yield %>
+</body>
+</html>

@@ -1,0 +1,20 @@
+= Setup
+
+== OAuth
+
+  $ vi config/initializers/omniauth.rb
+
+== DB
+It's not necessary if you use sqlite3 on localhost and posgresql on heroku.
+  
+  $ vi config/database.yml
+
+== S3
+
+  $ vi config/s3.yml
+
+= Test on localhost
+
+  $ rake db:migrate
+  $ rails s
+

@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b><br />
+  <%= @product.title %>
+</p>
+
+<p>
+  <b>User:</b><br />
+  <%= User.find(@product.user_id).name %> 
+</p>
+
+<p>
+  	<b>200x200:</b><br />
+	<%= image_tag @product.photo.url %>
+</p>
+<p>
+  	<b>100x100:</b><br />
+	<%= image_tag @product.photo(:thumb) %>
+</p>
+
+<p>
+<b>Description:</b><br />
+<% @product.descriptions.each do |d| %>
+	<%= "#{d.description}" %><br />
+<% end %>
+</p>
+<% if @product.user == current_user %>
+	<%= link_to 'Edit', edit_product_path(@product) %> 
+<% end %>
+
+<hr>
+
+<p>
+<b>Comment:</b><br />
+<% if @product.comments %>
+  <% @product.comments.each do |c| %>
+      <%= "#{c.comment}" %>   (by <%= "#{User.find(c.user_id).name}" %>) <br />
+  <% end %>
+<% end %><br>
+
+<% if current_user %>
+  <%= render @product.comments.build %>
+<% else %>
+  コメントするためにはログインが必要です。
+<% end %>
+</p>
+
+<%= link_to 'Back', products_path %>

@@ -1,0 +1,36 @@
+<h1>Listing products</h1>
+
+<table border=1 cellspacing=0 cellpadding=2>
+  <tr>
+    <th>Product</th>
+    <th>User</th>
+    <th>Thumbnail</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @products.each do |product| %>
+    <tr>
+    <td><%= product.title %></td>
+    <td><%= product.user.name %></td>
+	<td><%= image_tag product.photo(:thumb) %></td>
+    <td><%= link_to 'Show', product %></td>
+    <% if product.user == current_user %>
+      <td><%= link_to 'Edit', edit_product_path(product) %></td>
+      <td><%= link_to 'Destroy', product, confirm: 'Are you sure?', method: :delete %></td>
+	<% else %>
+      <td>Edit</td>
+      <td>Destroy</td>
+    <% end %>
+    </tr>
+  <% end %>
+</table>
+<br/>
+
+<% if current_user %>
+  <%= link_to 'New Product', new_product_path %>
+<% else %>
+  アップロードや編集をするためにはログインが必要です。 
+<% end %>
+
